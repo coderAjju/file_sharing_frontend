@@ -1,0 +1,93 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(145deg, rgba(0,0,0,1) 0%, rgba(4,27,45,1) 100%);
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: transparent;
+}
+
+.logo h1 {
+  color: #F1F1F1; /* Light gray color */
+  margin: 0;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 3.5rem;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #D3D3D3; /* Light gray color */
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #ad16d3; /* Change on hover */
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.auth-buttons button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+.auth-buttons .login {
+  background-color: transparent; /* Green for Signup */
+}
+
+.auth-buttons .signup {
+  background-color: #ad16d3; /* Blue for Login */
+}
+
+.auth-buttons button:hover {
+  opacity: 0.9;
+}
+
+
+.LayoutColor{
+  width:100%;
+  height:100%;
+
+  background: linear-gradient(180deg, rgba(7, 3, 29, 0.699) 1%, rgb(19, 0, 31) 50%, rgba(42, 1, 53, 0.808) 100%);
+  background-size: 150% 150%; /* Makes the gradient larger and smoother */
+
+}
+
+.uploadBtn{
+  background: linear-gradient(90deg,rgba(119, 119, 5, 0.781),rgb(82, 3, 82));
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid white;
+
+}
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  --b: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #514b82;
+  -webkit-mask:
+    repeating-conic-gradient(#0000 0deg,#000 1deg 70deg,#0000 71deg 90deg),
+    radial-gradient(farthest-side,#0000 calc(100% - var(--b) - 1px),#000 calc(100% - var(--b)));
+  -webkit-mask-composite: destination-in;
+          mask-composite: intersect;
+  animation: l5 1s infinite;
+}
+@keyframes l5 {to{transform: rotate(.5turn)}}
