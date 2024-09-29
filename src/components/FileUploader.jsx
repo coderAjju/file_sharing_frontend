@@ -18,7 +18,7 @@ function FileUploader() {
         });
         setLoading(true);
 
-       
+       console.log("formData", formData);
         try {
             const response = await axios.post('http://localhost:5000/api/files/upload', formData, {
                 headers: {
