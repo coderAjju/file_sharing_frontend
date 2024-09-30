@@ -20,7 +20,7 @@ function FileUploader() {
 
        console.log("formData", formData);
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}api/files/upload`, formData, {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/files/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
