@@ -12,7 +12,7 @@ const DownloadPage = () => {
   },[]);
   const fetchUrls = async ()=>{
       try {
-          const response = await axios.get(`http://localhost:5000/api/files/download/${token}`);   
+          const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/files/download/${token}`);   
           console.log(response.data.urls)
           console.log(response.data.fileNames)
 
