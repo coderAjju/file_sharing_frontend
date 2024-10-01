@@ -8,6 +8,7 @@ import RegistrationForm from './pages/RegistrationPage';
 import Documentation from './pages/Docs';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import HistoryPage from './pages/HistoryPage';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<RegistrationForm />} />
         <Route path="/docs" element={<Documentation />} />
+        <Route path="/history" element={<HistoryPage />} />
       </Routes>
       <ToastContainer
         position="top-center"

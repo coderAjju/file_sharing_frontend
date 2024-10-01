@@ -43,7 +43,6 @@ const navigate = useNavigate();
       return;
     }
 
-
     // check if the file size is greater than 15 MB
     const fileSize = selectedFiles.reduce((total, file) => total + file.size, 0);
     if (fileSize > 15 * 1024 * 1024) {
@@ -59,6 +58,7 @@ const navigate = useNavigate();
       setUploadProgress(30); // Simulate upload progress
       try {
         const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/files/upload`, formData, {
+          withCredentials:true,
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -66,6 +66,7 @@ const navigate = useNavigate();
         setUploadProgress(100);
         setUploadedFiles(response.data.downloadUrl.url)
       } catch (error) {
+        console.log(error);
         console.log("error while uploading file");
       }
       setIsUploading(false);
