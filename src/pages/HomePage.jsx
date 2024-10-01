@@ -39,7 +39,6 @@ function HomePage() {
       })
       setIsUploading(true);
       setUploadProgress(30); // Simulate upload progress
-      console.log(selectedFiles)
       try {
         const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/files/upload`, formData, {
           headers: {
@@ -47,10 +46,9 @@ function HomePage() {
           },
         });
         setUploadProgress(100);
-        console.log(response.data.downloadUrl)
         setUploadedFiles(response.data.downloadUrl.url)
       } catch (error) {
-        console.log(error);
+        console.log("error while uploading file");
       }
       setIsUploading(false);
     } else {
@@ -66,7 +64,6 @@ function HomePage() {
       console.error('Failed to copy: ', err);
     });
   };
-  console.log("uploaded files: " + uploadedFiles)
   return (
     <div className="flex flex-col">
       <Header />

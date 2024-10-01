@@ -18,14 +18,12 @@ function FileUploader() {
         });
         setLoading(true);
 
-       console.log("formData", formData);
         try {
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/files/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            console.log(response.data.downloadUrl)
             setUploadedFiles(response.data.downloadUrl.url)
         } catch (error) {
             console.log(error);

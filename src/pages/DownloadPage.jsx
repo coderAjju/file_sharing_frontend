@@ -13,9 +13,7 @@ const DownloadPage = () => {
   const fetchUrls = async ()=>{
       try {
           const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/files/download/${token}`);   
-          console.log(response.data.urls)
-          console.log(response.data.fileNames)
-
+      
         // collect url and file names in json format
         const urlsAndNames = response.data.urls.map((url,index)=>(
           {id:index,url, fileName:response.data.fileNames[index]}
@@ -23,7 +21,6 @@ const DownloadPage = () => {
         setUrls(urlsAndNames)
 
       } catch (error) {
-          console.error(error)
           alert("Failed to download file")
       }
   }
