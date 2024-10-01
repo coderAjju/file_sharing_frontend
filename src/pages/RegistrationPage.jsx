@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
@@ -45,7 +46,8 @@ const RegistrationForm = () => {
         <form onSubmit={handleSubmit}>
           {/* Username */}
           <div className="mb-4">
-            <label className="block text-gray-300">Username</label>
+            <label className="
+            block text-gray-300">Username</label>
             <input
               type="text"
               name="username"

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { toast } from "react-toastify";
 
 const HistoryPage = () => {
     const [fileHistory, setFileHistory] = useState([]);
@@ -32,11 +33,13 @@ const HistoryPage = () => {
             if (response.ok) {
                 // Remove the deleted file from state
                 setFileHistory((prevFiles) => prevFiles.filter((file) => file._id !== fileId));
+                toast.success("File deleted successfully");
             } else {
-                console.error('Failed to delete file');
+                toast.error("Failed to delete file");
             }
         } catch (error) {
             console.error('Error deleting file:', error);
+            toast.error("Error deleting file");
         }
     };
 

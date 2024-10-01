@@ -76,12 +76,27 @@ function Header() {
               <Link to={"/"} className=" hover:text-blue-600 mb-4 transition duration-300 ease-in-out">
                 Home
               </Link>
-              <Link to={"/login"} className=" hover:text-blue-600 transition duration-300 ease-in-out">
+              {
+                token && token ?
+                <>
+                <Link to={"/logout"} className=" hover:text-blue-600 transition duration-300 ease-in-out">
+                Logout
+              </Link>
+              <Link to={"/history"} className="hover:text-blue-600 transition duration-300 ease-in-out mt-4">
+                History
+              </Link>
+                </>:
+                <>
+                <Link to={"/login"} className=" hover:text-blue-600 transition duration-300 ease-in-out">
                 Login
               </Link>
               <Link to={"/signup"} className="hover:text-blue-600 transition duration-300 ease-in-out mt-4">
-                Pricing
+                Sign up
               </Link>
+                </>
+              }
+              
+              
               <Link to={"/docs"} className="hover:text-blue-600 transition duration-300 ease-in-out mt-4">
                 Docs
               </Link>
