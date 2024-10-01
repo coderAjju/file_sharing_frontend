@@ -14,16 +14,6 @@ function HomePage() {
   const [uploadedFiles, setUploadedFiles] = useState(null);
 
 const navigate = useNavigate();
-  
-  useEffect(()=>{
-    setInterval(()=>{
-      let token = localStorage.getItem("token");
-      if(!token){
-        navigate("/login");
-      }
-    },5000)
-  },[])
-
 
   const handleFileChange = (event) => {
     setSelectedFiles([...event.target.files]);
@@ -45,6 +35,15 @@ const navigate = useNavigate();
   };
 
   const handleUpload = async () => {
+
+    //  first check user is authorized if authorized then only upload the file
+    const token = localStorage.getItem("token");
+    if(!token){
+      navigate("/login");
+      return;
+    }
+
+
     // check if the file size is greater than 15 MB
     const fileSize = selectedFiles.reduce((total, file) => total + file.size, 0);
     if (fileSize > 15 * 1024 * 1024) {
