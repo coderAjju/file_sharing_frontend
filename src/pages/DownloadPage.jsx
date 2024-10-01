@@ -21,7 +21,8 @@ const DownloadPage = () => {
         setUrls(urlsAndNames)
 
       } catch (error) {
-          alert("Failed to download file")
+          console.log(error);
+          alert("Request sender to resend the file")
       }
   }
 
@@ -30,8 +31,8 @@ const DownloadPage = () => {
     <Header/>
     <div className="container mx-auto px-4 py-12">
       <h2 className="text-3xl font-bold text-gray-200 text-center mb-8">Downloadable Files</h2>
-      <div className="flex flex-col space-y-4">
-        {urls && urls.map((url,index) => (
+      {urls && urls ? <div className="flex flex-col space-y-4">
+        {urls.map((url,index) => (
           <div
             key={index}
             className="bg-gray-800 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300 flex justify-between items-center"
@@ -39,15 +40,14 @@ const DownloadPage = () => {
             <h3 className="text-xl font-semibold text-gray-200">{url.fileName}</h3>
             <a
               href={url.url}
-              download
-              target='_blank'
+              download={url.url}
               className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-300"
             >
               Download
             </a>
           </div>
         ))}
-      </div>
+      </div> : <h1 className='text-red-500 text-xl text-center'>Files are deleted from database request sender to resend the files</h1>}
     </div>
     </>
   );

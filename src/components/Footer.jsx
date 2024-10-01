@@ -3,7 +3,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa"
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-400 py-12 mt-16">
+    <footer className="bg-gray-900 text-gray-400 mt-6 pb-6">
       <div className="container mx-auto px-4">
         {/* Brand Section */}
         <div className="text-center mb-8">
@@ -72,7 +72,7 @@ const Footer = () => {
         {/* Newsletter Section */}
         <div className="text-center mb-8">
           <h3 className="text-lg text-gray-200 mb-4">Stay Updated!</h3>
-          <form className="flex justify-center space-x-4">
+          <form className="flex justify-center items-center gap-4 sm:gap-0 flex-col sm:flex-row space-x-4">
             <input
               type="email"
               className="w-64 p-3 rounded-lg bg-gray-700 text-gray-300 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"

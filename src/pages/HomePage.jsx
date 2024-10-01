@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiUploadCloud } from "react-icons/fi";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import axios from 'axios';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 
 function HomePage() {
@@ -11,6 +12,18 @@ function HomePage() {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadedFiles, setUploadedFiles] = useState(null);
+
+const navigate = useNavigate();
+  
+  useEffect(()=>{
+    setInterval(()=>{
+      let token = localStorage.getItem("token");
+      if(!token){
+        navigate("/login");
+      }
+    },5000)
+  },[])
+
 
   const handleFileChange = (event) => {
     setSelectedFiles([...event.target.files]);
@@ -32,6 +45,12 @@ function HomePage() {
   };
 
   const handleUpload = async () => {
+    // check if the file size is greater than 15 MB
+    const fileSize = selectedFiles.reduce((total, file) => total + file.size, 0);
+    if (fileSize > 15 * 1024 * 1024) {
+      alert("File size is greater than 15 MB");
+      return;
+    }
     if (selectedFiles.length > 0) {
       const formData = new FormData();
       selectedFiles.forEach((file) => {
@@ -68,7 +87,7 @@ function HomePage() {
     <div className="flex flex-col">
       <Header />
       <div className=" mt-4 bg-gray-900 text-white flex flex-col justify-center items-center p-8">
-        <div className="w-full max-w-2xl p-10 bg-gray-800 rounded-2xl shadow-xl border border-gray-700">
+        <div className="w-full max-w-2xl p-4 sm:p-10 bg-gray-800 rounded-2xl shadow-xl border border-gray-700">
           <h1 className="text-4xl font-semibold text-center text-gray-100 mb-8">
             Share Your Media Files
           </h1>
@@ -100,14 +119,14 @@ function HomePage() {
           </div>
 
           {selectedFiles.length > 0 && (
-            <div className="mt-6 space-y-4">
+            <div className="mt-6 space-y-4 w-full">
               <h3 className="text-lg font-semibold text-gray-300">Selected Files</h3>
               {selectedFiles.map((file, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between bg-gray-700 p-3 rounded-lg shadow-sm border border-gray-600"
+                  className="flex w-full items-center justify-between bg-gray-700 p-3 rounded-lg shadow-sm border border-gray-600"
                 >
-                  <div className="flex items-center space-x-4">
+                  <div className="flex w-full items-center space-x-4">
                     {file.type.startsWith("image/") && (
                       <img
                         src={URL.createObjectURL(file)}
@@ -121,8 +140,12 @@ function HomePage() {
                         className="w-12 h-12 object-cover rounded-lg"
                       />
                     )}
-                    <p className="text-gray-300">{file.name}</p>
-                  </div>
+                     <div className="relative width w-full">
+                     <p className="text-gray-300 sm:w-[70%]">{file.name}</p>
+                      <p className="text-gray-300 sm:absolute right-5 top-1/2 transform -translate-y-1/2 bg-gray-700">{((file.size/1000/1000)).toFixed(2)} MB</p>
+                   
+                     </div>
+                      </div>
                   <button onClick={() => handleRemoveFile(index)}>
                     <AiOutlineCloseCircle className="text-red-500 text-xl" />
                   </button>
