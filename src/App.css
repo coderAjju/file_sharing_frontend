@@ -121,3 +121,22 @@ body {
 @keyframes l23 {
   100% {transform: rotate(1turn)}
 }
+
+/* For WebKit-based browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px;  /* Adjust the width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #2d2d2d; /* Scrollbar track color */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #555;  /* Scrollbar thumb color */
+  border-radius: 10px;      /* Rounded corners */
+  border: 2px solid #2d2d2d; /* Space around the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #999;  /* Thumb color on hover */
+}
