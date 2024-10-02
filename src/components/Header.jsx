@@ -19,10 +19,6 @@ function Header() {
   const handleLogout = async () => {
     // request to the server to clear the token
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/logout`,{},{
-        withCredentials: true
-      })
-      console.log(response);
       localStorage.removeItem("token");
       toast.success("Logged out successfully");
       navigate("/");
