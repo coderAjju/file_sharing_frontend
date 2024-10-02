@@ -69,19 +69,19 @@ const HistoryPage = () => {
                         {fileHistory.map((file, index) => (
                             <div
                                 key={file._id}
-                                className="bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 space-y-4"
+                                className="bg-gray-800 rounded-lg shadow-lg p-2 sm:p-6 space-y-4"
                             >
                                 <div className="flex justify-between items-center">
                                     <div>
-                                        <p className="text-sm text-gray-400">
+                                        <p className="text-[13px] sm:text-sm text-gray-400">
                                             Shared on: {new Date(file.createdAt).toLocaleString()}
                                         </p>
-                                        <h3 className="text-xl font-semibold">
+                                        <h3 className=" text-[18px] sm:text-xl font-semibold">
                                             File {index + 1}
                                         </h3>
                                     </div>
                                     <div>
-                                        <span className="bg-blue-600 text-white px-0 sm:px-3 py-1 rounded-lg text-sm">
+                                        <span className="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded-lg text-sm">
                                             Total Files: {file.filesName.length}
                                         </span>
                                     </div>
