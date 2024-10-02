@@ -13,7 +13,7 @@ function HomePage() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadedFiles, setUploadedFiles] = useState(null);
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleFileChange = (event) => {
     setSelectedFiles([...event.target.files]);
@@ -38,7 +38,7 @@ const navigate = useNavigate();
 
     //  first check user is authorized if authorized then only upload the file
     const token = localStorage.getItem("token");
-    if(!token){
+    if (!token) {
       navigate("/login");
       return;
     }
@@ -58,13 +58,13 @@ const navigate = useNavigate();
       setUploadProgress(30); // Simulate upload progress
       try {
         const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/files/upload`, formData, {
-          withCredentials:true,
+          withCredentials: true,
           headers: {
             'Content-Type': 'multipart/form-data',
           },
           headers: {
             'Authorization': `Bearer ${token}`,
-            "name":"ajay upadhyay"
+            "name": "ajay upadhyay"
           }
         });
         setUploadProgress(100);
@@ -144,12 +144,11 @@ const navigate = useNavigate();
                         className="w-12 h-12 object-cover rounded-lg"
                       />
                     )}
-                     <div className="sm:relative width w-full">
-                     <p className="text-gray-300 sm:w-[70%] w-full">{file.name}</p>
-                      <p className="text-gray-300 sm:absolute sm:right-5 sm:top-1/2 sm:transform sm:-translate-y-1/2 bg-gray-700">{((file.size/1000/1000)).toFixed(2)} MB</p>
-                   
-                     </div>
-                      </div>
+                    <div className="sm:relative w-full">
+                      <p className="text-gray-300 sm:w-[70%] ">{file.name}</p>
+                      <p className="text-gray-300 sm:absolute sm:right-5 sm:top-1/2 sm:transform sm:-translate-y-1/2 sm:bg-gray-700">{((file.size / 1000 / 1000)).toFixed(2)} MB</p>
+                    </div>
+                  </div>
                   <button onClick={() => handleRemoveFile(index)}>
                     <AiOutlineCloseCircle className="text-red-500 text-xl" />
                   </button>
@@ -198,7 +197,7 @@ const navigate = useNavigate();
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
