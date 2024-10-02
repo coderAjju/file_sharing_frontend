@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [LoginBtnClicked,setLoginBtnClicked] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -38,7 +39,8 @@ const LoginPage = () => {
   return (
    <>
    <Header/>
-   <div className="min-h-screen flex p-3 sm:p-0 items-center justify-center bg-gray-900">
+   <div className="min-h-screen flex p-3 sm:p-0
+    items-center justify-center bg-gray-900">
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-bold mb-6 text-white text-center">Login</h2>
         
@@ -75,7 +77,7 @@ const LoginPage = () => {
             type="submit"
             className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition"
           >
-            Login
+            {LoginBtnClicked ? <div className='loader'></div> : "Login"}
           </button>
           <span className='block text-center mt-2 text-white text-sm sm:text-[17px]'>Don't have an account? <Link to={"/signup"} className='text-blue-400'>Signup</Link></span>
         </form>
