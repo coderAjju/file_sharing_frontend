@@ -145,8 +145,8 @@ const navigate = useNavigate();
                       />
                     )}
                      <div className="relative width w-full">
-                     <p className="text-gray-300 sm:w-[70%]">{file.name}</p>
-                      <p className="text-gray-300 sm:absolute right-5 top-1/2 transform -translate-y-1/2 bg-gray-700">{((file.size/1000/1000)).toFixed(2)} MB</p>
+                     <p className="text-gray-300 sm:w-[70%] w-full">{file.name}</p>
+                      <p className="text-gray-300 sm:absolute sm:right-5 sm:top-1/2 sm:transform sm:-translate-y-1/2 bg-gray-700">{((file.size/1000/1000)).toFixed(2)} MB</p>
                    
                      </div>
                       </div>
