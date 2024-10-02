@@ -47,7 +47,6 @@ const HistoryPage = () => {
         }
     };
 
-console.log(fileHistory);
     return (
         <>
         <Header/>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 
 const DownloadPage = () => {
@@ -28,7 +28,11 @@ const DownloadPage = () => {
 
   return (
     <>
-    <Header/>
+    <nav className="flex justify-start items-center py-4 px-2 md:px-10  md:py-6 lg:py-8">
+      <Link to={"/"} className="flex items-center">
+        <img src="/assets/logo.png" className='w-36' alt="" />
+      </Link>
+    </nav>
     <div className="container mx-auto px-4 py-12">
       <h2 className="text-3xl font-bold text-gray-200 text-center mb-8">Downloadable Files</h2>
       {urls && urls ? <div className="flex flex-col space-y-4">
