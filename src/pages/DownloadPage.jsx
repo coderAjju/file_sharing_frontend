@@ -39,9 +39,9 @@ const DownloadPage = () => {
         {urls.map((url,index) => (
           <div
             key={index}
-            className="bg-gray-800 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300 flex justify-between items-center"
+            className="bg-gray-800 rounded-lg shadow-md p-2 sm:p-4 flex-col sm:flex-row hover:shadow-lg transition-shadow duration-300 flex justify-between items-center"
           >
-            <h3 className="text-xl font-semibold text-gray-200">{url.fileName}</h3>
+            <h3 className="text-xl break-words font-semibold text-gray-200">{url.fileName}</h3>
             <a
               href={url.url}
               download={url.url}
