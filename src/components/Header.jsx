@@ -78,7 +78,7 @@ function Header() {
               {
                 token && token ?
                 <>
-                <Link onClick={handleLogout} className=" hover:text-blue-600 transition duration-300 ease-in-out">
+                <Link onClick={handleLogout} to={"/login"} className=" hover:text-blue-600 transition duration-300 ease-in-out">
                 Logout
               </Link>
               <Link to={"/history"} className="hover:text-blue-600 transition duration-300 ease-in-out mt-4">
