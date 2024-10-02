@@ -31,6 +31,7 @@ const RegistrationForm = () => {
         withCredentials: true
       });
       toast.success(response.data.message);
+      setRegisterBtnClicked(false);
       navigate("/login");
       } catch (error) {
       toast.error(error.response ? error.response.data.message : error.message);

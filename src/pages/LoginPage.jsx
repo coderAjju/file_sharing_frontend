@@ -31,6 +31,7 @@ const LoginPage = () => {
       });
       toast.success("Login successful")
       localStorage.setItem("token",response.data.token);
+      setLoginBtnClicked(false);
       navigate("/");
       } catch (error) {
       toast.error(error.response ? error.response.data.message : error.message);
