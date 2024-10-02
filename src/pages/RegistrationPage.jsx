@@ -41,7 +41,7 @@ const RegistrationForm = () => {
   return (
     <>
         <Header/>
-    <div className="min-h-screen p-3 sm:p-0 flex items-center justify-center bg-gray-900">
+    <div className="min-h-[80vh] p-3 sm:p-0 flex items-center justify-center bg-gray-900">
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-bold mb-6 text-white text-center">Register</h2>
         
