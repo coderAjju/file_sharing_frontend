@@ -81,7 +81,7 @@ const HistoryPage = () => {
                                         </h3>
                                     </div>
                                     <div>
-                                        <span className="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded-lg text-sm">
+                                        <span className="bg-blue-600 text-white px-0 sm:px-3 py-1 rounded-lg text-sm">
                                             Total Files: {file.filesName.length}
                                         </span>
                                     </div>
