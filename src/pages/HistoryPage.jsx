@@ -14,6 +14,7 @@ const HistoryPage = () => {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
             });
 
