@@ -90,7 +90,7 @@ function HomePage() {
   return (
     <div className="flex flex-col">
       <Header />
-      <div className=" mt-4 bg-gray-900 text-white flex flex-col justify-center items-center p-8">
+      <div className=" mt-4 bg-gray-900 text-white flex flex-col justify-center items-center p-4 sm:p-8">
         <div className="w-full max-w-2xl p-4 sm:p-10 bg-gray-800 rounded-2xl shadow-xl border border-gray-700">
           <h1 className="text-4xl font-semibold text-center text-gray-100 mb-8">
             Share Your Media Files
@@ -145,7 +145,7 @@ function HomePage() {
                       />
                     )}
                     <div className="sm:relative w-full">
-                      <p className="text-gray-300 sm:w-[70%] break-words overflow-x-auto whitespace-normal scrollbar-hide bg-red-500">{file.name}</p>
+                      <p className="text-gray-300 sm:w-[70%] overflow-x-scroll bg-red-500">{file.name}</p>
                       <p className="text-gray-300 sm:absolute sm:right-5 sm:top-1/2 sm:transform sm:-translate-y-1/2 sm:bg-gray-700">{((file.size / 1000 / 1000)).toFixed(2)} MB</p>
                     </div>
                   </div>
