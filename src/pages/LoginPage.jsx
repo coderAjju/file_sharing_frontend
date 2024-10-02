@@ -25,6 +25,7 @@ const LoginPage = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try {
+      setLoginBtnClicked(true);
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`, formData,{
         withCredentials: true
       });
@@ -77,7 +78,7 @@ const LoginPage = () => {
             type="submit"
             className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition"
           >
-            {LoginBtnClicked ? <div className='loader'></div> : "Login"}
+            {LoginBtnClicked ? <div className='loaderCSS mx-auto'></div> : "Login"}
           </button>
           <span className='block text-center mt-2 text-white text-sm sm:text-[17px]'>Don't have an account? <Link to={"/signup"} className='text-blue-400'>Signup</Link></span>
         </form>

@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
+  const [RegisterBtnClicked, setRegisterBtnClicked] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -25,6 +26,7 @@ const RegistrationForm = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try {
+      setRegisterBtnClicked(true);
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`, formData,{
         withCredentials: true
       });
@@ -89,7 +91,7 @@ const RegistrationForm = () => {
             type="submit"
             className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition"
           >
-            Register
+            {RegisterBtnClicked ? <div className='loaderCSS mx-auto'></div> : "Register"}
           </button>
           <span className='block text-center mt-2 text-white text-sm sm:text-[17px]'>Already have an account? <Link to={"/login"} className='text-blue-400'>Login</Link></span>
 

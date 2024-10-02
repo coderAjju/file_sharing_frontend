@@ -5,6 +5,7 @@ import axios from 'axios';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 function HomePage() {
@@ -46,7 +47,7 @@ function HomePage() {
     // check if the file size is greater than 15 MB
     const fileSize = selectedFiles.reduce((total, file) => total + file.size, 0);
     if (fileSize > 15 * 1024 * 1024) {
-      alert("File size is greater than 15 MB");
+      toast.error("File size is greater than 15 MB");
       return;
     }
     if (selectedFiles.length > 0) {
@@ -130,7 +131,7 @@ function HomePage() {
                   key={index}
                   className="flex w-full items-center justify-between bg-gray-700 p-3 rounded-lg shadow-sm border border-gray-600"
                 >
-                  <div className="flex w-full items-center space-x-4">
+                  <div className=" flex w-[90%] items-center space-x-2">
                     {file.type.startsWith("image/") && (
                       <img
                         src={URL.createObjectURL(file)}
@@ -144,12 +145,12 @@ function HomePage() {
                         className="w-12 h-12 object-cover rounded-lg"
                       />
                     )}
-                    <div className="sm:relative w-full">
-                      <p className="text-gray-300 sm:w-[70%] w-[72%] truncate">{file.name}</p>
-                      <p className="text-gray-300 sm:absolute sm:right-5 sm:top-1/2 sm:transform sm:-translate-y-1/2 sm:bg-gray-700">{((file.size / 1000 / 1000)).toFixed(2)} MB</p>
+                    <div className="flex sm:flex-row flex-col gap-2 w-full">
+                      <p className="text-gray-300 sm:w-[65%] w-[72%] truncate">{file.name}</p>
+                      <p className="text-gray-300 sm:inline sm:ms-4 sm:bg-gray-700">{((file.size / 1000 / 1000)).toFixed(2)} MB</p>
                     </div>
                   </div>
-                  <button onClick={() => handleRemoveFile(index)}>
+                  <button onClick={() => handleRemoveFile(index)} className="mr-3">
                     <AiOutlineCloseCircle className="text-red-500 text-xl" />
                   </button>
                 </div>
@@ -176,7 +177,7 @@ function HomePage() {
           </button>
 
           <div>
-            {uploadedFiles && (
+            {selectedFiles.length > 0 && uploadedFiles && (
               <div className="mt-4">
                 <div className="flex items-center space-x-2 mb-2">
                   <input

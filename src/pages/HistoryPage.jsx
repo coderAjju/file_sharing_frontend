@@ -50,7 +50,7 @@ const HistoryPage = () => {
     };
     const copyToClipboard = (url) => {
         navigator.clipboard.writeText(url).then(() => {
-          alert('URL copied to clipboard');
+          toast.success("URL copied to clipboard")
         }).catch(err => {
           console.error('Failed to copy: ', err);
         });

@@ -94,8 +94,8 @@ body {
 
 
 /* HTML: <div class="loader"></div> */
-.loader {
-  width: 50px;
+.loaderCSS {
+  width: 30px;
   aspect-ratio: 1;
   display: grid;
   border-radius: 50%;
@@ -105,8 +105,8 @@ body {
   background-repeat: no-repeat;
   animation: l23 1s infinite steps(12);
 }
-.loader::before,
-.loader::after {
+.loaderCSS::before,
+.loaderCSS::after {
    content: "";
    grid-area: 1/1;
    border-radius: 50%;
@@ -114,7 +114,7 @@ body {
    opacity: 0.915;
    transform: rotate(30deg);
 }
-.loader::after {
+.loaderCSS::after {
    opacity: 0.83;
    transform: rotate(60deg);
 }
