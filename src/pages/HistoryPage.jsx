@@ -59,11 +59,11 @@ const HistoryPage = () => {
     return (
         <>
             <Header />
-            <div className="bg-gray-900 text-white p-4 sm:p-8">
+            <div className="min-h-screen bg-gray-900 text-white p-4 sm:p-8">
                 <h2 className="text-3xl font-bold mb-6 text-center">File Sharing History</h2>
 
                 {fileHistory.length === 0 ? (
-                    <p className="text-center text-lg">No files shared yet.</p>
+                    <p className="text-center text-red-500 text-lg">No files shared yet.</p>
                 ) : (
                     <div className="space-y-6">
                         {fileHistory.map((file, index) => (
