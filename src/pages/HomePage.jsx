@@ -145,7 +145,7 @@ function HomePage() {
                       />
                     )}
                     <div className="sm:relative w-full">
-                      <p className="text-gray-300 sm:w-[70%] w-[70%]">{file.name}</p>
+                      <p className="text-gray-300 sm:w-[70%] w-[50%]">{file.name}</p>
                       <p className="text-gray-300 sm:absolute sm:right-5 sm:top-1/2 sm:transform sm:-translate-y-1/2 sm:bg-gray-700">{((file.size / 1000 / 1000)).toFixed(2)} MB</p>
                     </div>
                   </div>
