@@ -19,6 +19,9 @@ function Header() {
   const handleLogout = async () => {
     // request to the server to clear the token
     try {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/logout`,{},{
+        withCredentials: true
+      })
       localStorage.removeItem("token");
       toast.success("Logged out successfully");
       navigate("/");
@@ -75,7 +78,7 @@ function Header() {
               {
                 token && token ?
                 <>
-                <Link to={"/logout"} className=" hover:text-blue-600 transition duration-300 ease-in-out">
+                <Link onClick={handleLogout} className=" hover:text-blue-600 transition duration-300 ease-in-out">
                 Logout
               </Link>
               <Link to={"/history"} className="hover:text-blue-600 transition duration-300 ease-in-out mt-4">
