@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 const HistoryPage = () => {
     const [fileHistory, setFileHistory] = useState([]);
-
+    let token = localStorage.getItem('token');
 
     const fetchHistory = async () => {
         try {
