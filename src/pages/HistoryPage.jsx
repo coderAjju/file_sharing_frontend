@@ -59,7 +59,7 @@ const HistoryPage = () => {
     return (
         <>
             <Header />
-            <div className="min-h-screen bg-gray-900 text-white p-4 sm:p-8">
+            <div className="bg-gray-900 text-white p-4 sm:p-8">
                 <h2 className="text-3xl font-bold mb-6 text-center">File Sharing History</h2>
 
                 {fileHistory.length === 0 ? (
