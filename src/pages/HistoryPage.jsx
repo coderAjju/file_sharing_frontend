@@ -11,7 +11,10 @@ const HistoryPage = () => {
     const fetchHistory = async () => {
         try {
             const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/files/history`,{
-                withCredentials: true
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             });
 
             setFileHistory(response.data.files);

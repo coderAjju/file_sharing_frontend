@@ -62,6 +62,10 @@ const navigate = useNavigate();
           headers: {
             'Content-Type': 'multipart/form-data',
           },
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            "name":"ajay upadhyay"
+          }
         });
         setUploadProgress(100);
         setUploadedFiles(response.data.downloadUrl.url)

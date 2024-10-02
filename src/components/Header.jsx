@@ -25,7 +25,7 @@ function Header() {
       console.log(response);
       localStorage.removeItem("token");
       toast.success("Logged out successfully");
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
