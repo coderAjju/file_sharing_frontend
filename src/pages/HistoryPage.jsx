@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 
 const HistoryPage = () => {
     const [fileHistory, setFileHistory] = useState([]);
-    const [deleteBtn, setDeleteBtn] = useState(false);
     let token = localStorage.getItem('token');
 
     const fetchHistory = async () => {
@@ -29,7 +28,9 @@ const HistoryPage = () => {
     }, []);
 
     const handleDelete = async (fileId) => {
-        setDeleteBtn(true);
+        toast.info("Deleting...",{
+            autoClose: 1000,
+        });
         try {
             const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/files/delete/${fileId}`, {
                 method: 'DELETE',
@@ -55,7 +56,6 @@ const HistoryPage = () => {
           console.error('Failed to copy: ', err);
         });
       };
-    console.log(fileHistory);
     return (
         <>
             <Header />
@@ -107,7 +107,7 @@ const HistoryPage = () => {
                                     onClick={() => handleDelete(file._id)}
                                     className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200"
                                 >
-                                    {deleteBtn ? "Deleting..." : "Delete"}
+                                    Delete
                                 </button>
                                 <button
                                     onClick={() => copyToClipboard(file.downloadUrl)}
