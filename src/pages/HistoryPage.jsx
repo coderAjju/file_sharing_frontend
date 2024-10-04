@@ -7,24 +7,6 @@ import { toast } from "react-toastify";
 const HistoryPage = () => {
     const [fileHistory, setFileHistory] = useState([]);
     let token = localStorage.getItem('token');
-
-    const deleteImageFromCloudinary = async (fileHistory) => {
-        try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/files/delete`, {
-                fileHistory,
-            }, {
-                withCredentials: true,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-            });
-            console.log(response.data);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     const fetchHistory = async () => {
         try {
             const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/files/history`, {
@@ -41,16 +23,41 @@ const HistoryPage = () => {
         }
     }
     useEffect(() => {
-        let loginTimestamp = localStorage.getItem("loginTimestamp");
-        let expiresAt = localStorage.getItem("expiresAt");
-        if(loginTimestamp === expiresAt){
-            localStorage.removeItem("loginTimestamp");
-            localStorage.removeItem("expiresAt");
-            deleteImageFromCloudinary(fileHistory);    
-        }
         fetchHistory();
     }, [fileHistory]);
 
+    // -----------implemention of image deletion after 1 hour autmatically started ---------------
+    const deleteExpiredFiles = async (fileHistory) => {
+        const loginTimestamp = localStorage.getItem('loginTimestamp');
+        const currentTime = Date.now();
+        const oneHourInMilliseconds = 60 * 1000;
+
+        if (loginTimestamp && (currentTime - parseInt(loginTimestamp) > oneHourInMilliseconds)) {
+            try {
+                await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/files/delete`, {
+                    fileHistory,
+                }, {
+                    withCredentials: true,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                });
+                setFileHistory([]);
+                localStorage.removeItem('loginTimestamp');
+                localStorage.removeItem('expiresAt');
+            } catch (error) {
+                console.error('Error deleting expired files:', error);
+            }
+        }
+    };
+
+    useEffect(() => {
+        deleteExpiredFiles(fileHistory);
+        const interval = setInterval(deleteExpiredFiles, 60000); // Check every minute
+        return () => clearInterval(interval);
+    }, [fileHistory]);
+// ------------implementation of image deletion after 1 hour automatically ended ----------------
 
 
     const handleDelete = async (fileId) => {

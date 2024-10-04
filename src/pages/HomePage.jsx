@@ -14,17 +14,20 @@ function HomePage() {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadedFiles, setUploadedFiles] = useState(null);
+  const [qrGenerated, setQrGenerated] = useState(false);
 
   const navigate = useNavigate();
-
   const canvasRef = useRef(null);
 
   const generateQRCode = async (url) => {
     try {
-      if(url){
-        console.log("please provide url")
-      }
-      await QRCode.toCanvas(canvasRef.current, url, { width:256 });
+      await QRCode.toCanvas(canvasRef.current, url, { width:256 },(err,canvas)=>{
+        if(err){
+          console.error("Error generating QR code", err);
+        } else if(canvas){
+          setQrGenerated(true);
+        }
+      });
     } catch (error) {
       console.error("Error generating QR code", error);
     }
@@ -193,8 +196,12 @@ function HomePage() {
 
           {/* QR Code */}
           <div className="mt-4 flex justify-center">
-            {uploadedFiles &&
+            {uploadedFiles && qrGenerated ?
               <canvas ref={canvasRef}></canvas>
+            :
+            <div>
+              <p>Generating QR Code...</p>
+            </div>
             }
           </div>
           <div>
