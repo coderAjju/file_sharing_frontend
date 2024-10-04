@@ -21,6 +21,9 @@ function HomePage() {
 
   const generateQRCode = async (url) => {
     try {
+      if(url){
+        console.log("please provide url")
+      }
       await QRCode.toCanvas(canvasRef.current, url, { width:256 });
     } catch (error) {
       console.error("Error generating QR code", error);

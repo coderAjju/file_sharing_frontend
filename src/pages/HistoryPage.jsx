@@ -8,6 +8,23 @@ const HistoryPage = () => {
     const [fileHistory, setFileHistory] = useState([]);
     let token = localStorage.getItem('token');
 
+    const deleteImageFromCloudinary = async (fileHistory) => {
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/files/delete`, {
+                fileHistory,
+            }, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const fetchHistory = async () => {
         try {
             const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/files/history`, {
@@ -24,8 +41,17 @@ const HistoryPage = () => {
         }
     }
     useEffect(() => {
+        let loginTimestamp = localStorage.getItem("loginTimestamp");
+        let expiresAt = localStorage.getItem("expiresAt");
+        if(loginTimestamp === expiresAt){
+            localStorage.removeItem("loginTimestamp");
+            localStorage.removeItem("expiresAt");
+            deleteImageFromCloudinary(fileHistory);    
+        }
         fetchHistory();
-    }, []);
+    }, [fileHistory]);
+
+
 
     const handleDelete = async (fileId) => {
         toast.info("Deleting...",{

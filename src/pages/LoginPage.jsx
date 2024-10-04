@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Link, useNavigate } from 'react-router-dom';
@@ -31,6 +31,8 @@ const LoginPage = () => {
       });
       toast.success("Login successful")
       localStorage.setItem("token",response.data.token);
+      localStorage.setItem("loginTimestamp",Date.now());
+      localStorage.setItem("expiresAt",Date.now() + 1000 * 60);
       setLoginBtnClicked(false);
       navigate("/");
       } catch (error) {
