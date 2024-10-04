@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { FiUploadCloud } from "react-icons/fi";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import axios from 'axios';
@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import QRCode from 'qrcode';
 
 
 function HomePage() {
@@ -15,6 +16,16 @@ function HomePage() {
   const [uploadedFiles, setUploadedFiles] = useState(null);
 
   const navigate = useNavigate();
+
+  const canvasRef = useRef(null);
+
+  const generateQRCode = async (url) => {
+    try {
+      await QRCode.toCanvas(canvasRef.current, url, { width:256 });
+    } catch (error) {
+      console.error("Error generating QR code", error);
+    }
+  };
 
   const handleFileChange = (event) => {
     setSelectedFiles([...event.target.files]);
@@ -70,6 +81,7 @@ function HomePage() {
         });
         setUploadProgress(100);
         setUploadedFiles(response.data.downloadUrl.url)
+        generateQRCode(response.data.downloadUrl.url);
       } catch (error) {
         console.log(error);
         console.log("error while uploading file");
@@ -176,6 +188,12 @@ function HomePage() {
             {isUploading ? "Uploading..." : "Upload Files"}
           </button>
 
+          {/* QR Code */}
+          <div className="mt-4 flex justify-center">
+            {uploadedFiles &&
+              <canvas ref={canvasRef}></canvas>
+            }
+          </div>
           <div>
             {selectedFiles.length > 0 && uploadedFiles && (
               <div className="mt-4">
