@@ -21,10 +21,10 @@ function HomePage() {
 
   const generateQRCode = async (url) => {
     try {
-      await QRCode.toCanvas(canvasRef.current, url, { width:256 },(err,canvas)=>{
-        if(err){
+      await QRCode.toCanvas(canvasRef.current, url, { width: 256 }, (err, canvas) => {
+        if (err) {
           console.error("Error generating QR code", err);
-        } else if(canvas){
+        } else if (canvas) {
           setQrGenerated(true);
         }
       });
@@ -195,17 +195,17 @@ function HomePage() {
           </button>
 
           {/* QR Code */}
-          <div className="mt-4 flex justify-center">
-            {uploadedFiles && qrGenerated ?
-              <canvas ref={canvasRef}></canvas>
-            :
-            <div>
-              <p>Generating QR Code...</p>
+
+          {selectedFiles.length > 0 ? <div>
+            <div className="mt-4 flex justify-center">
+              {uploadedFiles && qrGenerated ?
+                <canvas ref={canvasRef}></canvas>
+                :
+               
+              null
+              }
             </div>
-            }
-          </div>
-          <div>
-            {selectedFiles.length > 0 && uploadedFiles && (
+            {uploadedFiles && (
               <div className="mt-4">
                 <div className="flex items-center space-x-2 mb-2">
                   <input
@@ -224,6 +224,9 @@ function HomePage() {
               </div>
             )}
           </div>
+          :
+          null
+}
         </div>
       </div>
       <Footer />

@@ -57,11 +57,22 @@ const HistoryPage = () => {
         const interval = setInterval(deleteExpiredFiles, 60000); // Check every minute
         return () => clearInterval(interval);
     }, [fileHistory]);
-// ------------implementation of image deletion after 1 hour automatically ended ----------------
+    // ------------implementation of image deletion after 1 hour automatically ended ----------------
+
+    if (fileHistory.length > 0) {
+        fileHistory.forEach(file => {
+            setInterval(() => {
+                if (file.createdAt + 60000 < Date.now()) {
+                    handleDelete(file._id);
+                }
+            }, 60000);
+        });
+    }
+
 
 
     const handleDelete = async (fileId) => {
-        toast.info("Deleting...",{
+        toast.info("Deleting...", {
             autoClose: 1000,
         });
         try {
@@ -84,11 +95,11 @@ const HistoryPage = () => {
     };
     const copyToClipboard = (url) => {
         navigator.clipboard.writeText(url).then(() => {
-          toast.success("URL copied to clipboard")
+            toast.success("URL copied to clipboard")
         }).catch(err => {
-          console.error('Failed to copy: ', err);
+            console.error('Failed to copy: ', err);
         });
-      };
+    };
     return (
         <>
             <Header />
