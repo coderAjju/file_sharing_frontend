@@ -35,7 +35,7 @@ const DownloadPage = () => {
     </nav>
     <div className="container mx-auto px-4 py-12">
       <h2 className="text-3xl font-bold text-gray-200 text-center mb-8">Downloadable Files</h2>
-      {urls && urls ? <div className="flex flex-col space-y-4">
+      {urls ? (urls ? <div className="flex flex-col space-y-4">
         {urls.map((url,index) => (
           <div
             key={index}
@@ -51,7 +51,10 @@ const DownloadPage = () => {
             </a>
           </div>
         ))}
-      </div> : <h1 className='text-red-500 text-xl text-center'>Files are deleted from database request sender to resend the files</h1>}
+      </div> : <h1 className='text-red-500 text-xl text-center'>Files are deleted from database request sender to resend the files</h1>)
+      :
+      <h1 className='text-xl text-white text-center'>Loading...</h1>
+      }
     </div>
     </>
   );

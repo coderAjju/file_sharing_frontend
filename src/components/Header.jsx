@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -23,8 +23,8 @@ function Header() {
         withCredentials: true
       })
       localStorage.removeItem("token");
-      toast.success("Logged out successfully");
       navigate("/");
+      toast.success(response.data.message);
     } catch (error) {
       console.log(error);
     }

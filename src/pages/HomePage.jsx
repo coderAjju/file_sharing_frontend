@@ -101,7 +101,7 @@ function HomePage() {
   // Copy the URL to the clipboard
   const copyToClipboard = (url) => {
     navigator.clipboard.writeText(url).then(() => {
-      alert('URL copied to clipboard');
+      toast.success("URL copied to clipboard")
     }).catch(err => {
       console.error('Failed to copy: ', err);
     });
@@ -197,14 +197,7 @@ function HomePage() {
           {/* QR Code */}
 
           {selectedFiles.length > 0 ? <div>
-            <div className="mt-4 flex justify-center">
-              {uploadedFiles && qrGenerated ?
-                <canvas ref={canvasRef}></canvas>
-                :
-               
-              null
-              }
-            </div>
+            
             {uploadedFiles && (
               <div className="mt-4">
                 <div className="flex items-center space-x-2 mb-2">
@@ -223,6 +216,14 @@ function HomePage() {
                 </div>
               </div>
             )}
+            <div className="mt-4 flex justify-center">
+              {uploadedFiles && qrGenerated ?
+                <canvas ref={canvasRef}></canvas>
+                :
+               
+              null
+              }
+            </div>
           </div>
           :
           null

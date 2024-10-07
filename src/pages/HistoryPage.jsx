@@ -26,46 +26,15 @@ const HistoryPage = () => {
         fetchHistory();
     }, [fileHistory]);
 
-    // -----------implemention of image deletion after 1 hour autmatically started ---------------
-    const deleteExpiredFiles = async (fileHistory) => {
-        const loginTimestamp = localStorage.getItem('loginTimestamp');
-        const currentTime = Date.now();
-        const oneHourInMilliseconds = 60 * 1000;
 
-        if (loginTimestamp && (currentTime - parseInt(loginTimestamp) > oneHourInMilliseconds)) {
-            try {
-                await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/files/delete`, {
-                    fileHistory,
-                }, {
-                    withCredentials: true,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                });
-                setFileHistory([]);
-                localStorage.removeItem('loginTimestamp');
-                localStorage.removeItem('expiresAt');
-            } catch (error) {
-                console.error('Error deleting expired files:', error);
-            }
-        }
-    };
-
-    useEffect(() => {
-        deleteExpiredFiles(fileHistory);
-        const interval = setInterval(deleteExpiredFiles, 60000); // Check every minute
-        return () => clearInterval(interval);
-    }, [fileHistory]);
-    // ------------implementation of image deletion after 1 hour automatically ended ----------------
-
+    // // ------------implementation of image deletion after 1 hour automatically ended ----------------
     if (fileHistory.length > 0) {
         fileHistory.forEach(file => {
             setInterval(() => {
-                if (file.createdAt + 60000 < Date.now()) {
+                if (file.createdAt + 600000 < Date.now()) {
                     handleDelete(file._id);
                 }
-            }, 60000);
+            }, 600000);
         });
     }
 
@@ -106,63 +75,65 @@ const HistoryPage = () => {
             <div className="min-h-screen bg-gray-900 text-white p-4 sm:p-8">
                 <h2 className="text-3xl font-bold mb-6 text-center">File Sharing History</h2>
 
-                {fileHistory.length === 0 ? (
-                    <p className="text-center text-red-500 text-lg">No files shared yet.</p>
-                ) : (
-                    <div className="space-y-6">
-                        {fileHistory.map((file, index) => (
-                            <div
-                                key={file._id}
-                                className="bg-gray-800 rounded-lg shadow-lg p-2 sm:p-6 space-y-4"
-                            >
-                                <div className="flex justify-between items-center">
-                                    <div>
-                                        <p className="text-[13px] sm:text-sm text-gray-400">
-                                            Shared on: {new Date(file.createdAt).toLocaleString()}
-                                        </p>
-                                        <h3 className=" text-[18px] sm:text-xl font-semibold">
-                                            File {index + 1}
-                                        </h3>
-                                    </div>
-                                    <div>
-                                        <span className="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded-lg text-sm">
-                                            Total Files: {file.filesName.length}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div className="space-y-2">
-                                    {file.filesName.map((name, idx) => (
-                                        <div key={idx} className="flex justify-between items-center">
-                                            <p className="font-medium">{name}</p>
-                                            <a
-                                                href={file.fileUrl[idx]}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-blue-400 hover:underline"
-                                            >
-                                                View / Download
-                                            </a>
+                {
+                    fileHistory.length !== 0 ? ( fileHistory.length !== 0 ? (
+                        <div className="space-y-6">
+                            {fileHistory.map((file, index) => (
+                                <div
+                                    key={file._id}
+                                    className="bg-gray-800 rounded-lg shadow-lg p-2 sm:p-6 space-y-4"
+                                >
+                                    <div className="flex justify-between items-center">
+                                        <div>
+                                            <p className="text-[13px] sm:text-sm text-gray-400">
+                                                Shared on: {new Date(file.createdAt).toLocaleString()}
+                                            </p>
+                                            <h3 className=" text-[18px] sm:text-xl font-semibold">
+                                                File {index + 1}
+                                            </h3>
                                         </div>
-                                    ))}
+                                        <div>
+                                            <span className="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded-lg text-sm">
+                                                Total Files: {file.filesName.length}
+                                            </span>
+                                        </div>
+                                    </div>
+    
+                                    <div className="space-y-2">
+                                        {file.filesName.map((name, idx) => (
+                                            <div key={idx} className="flex justify-between items-center">
+                                                <p className="font-medium">{name}</p>
+                                                <a
+                                                    href={file.fileUrl[idx]}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-blue-400 hover:underline"
+                                                >
+                                                    View / Download
+                                                </a>
+                                            </div>
+                                        ))}
+                                    </div>
+    
+                                    <button
+                                        onClick={() => handleDelete(file._id)}
+                                        className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200"
+                                    >
+                                        Delete
+                                    </button>
+                                    <button
+                                        onClick={() => copyToClipboard(file.downloadUrl)}
+                                        className=" ms-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700"
+                                    >
+                                        Copy
+                                    </button>
                                 </div>
-
-                                <button
-                                    onClick={() => handleDelete(file._id)}
-                                    className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200"
-                                >
-                                    Delete
-                                </button>
-                                <button
-                                    onClick={() => copyToClipboard(file.downloadUrl)}
-                                    className=" ms-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700"
-                                >
-                                    Copy
-                                </button>
-                            </div>
-                        ))}
-                    </div>
-                )}
+                            ))}
+                        </div>
+                    ) : (
+                        <h1 className='text-xl text-white text-center'>Loading...</h1>
+                    )):<p className="text-center text-red-500 text-lg">No files shared yet.</p>
+                }
             </div>
             <Footer />
         </>
