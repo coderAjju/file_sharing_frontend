@@ -23,8 +23,9 @@ function Header() {
         withCredentials: true
       })
       localStorage.removeItem("token");
-      navigate("/login");
+      navigate("/");
       toast.success(response.data.message);
+      setToken(null);
     } catch (error) {
       console.log(error);
     }
