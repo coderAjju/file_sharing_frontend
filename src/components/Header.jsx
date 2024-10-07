@@ -47,7 +47,7 @@ function Header() {
         {
           token && token ?
             <>
-              <NavLink to={"/login"} onClick={handleLogout} className={({ isActive }) =>
+              <NavLink to={"/"} onClick={handleLogout} className={({ isActive }) =>
                 `text-gray-400 hover:text-blue-600 transition duration-300 ease-in-out ${isActive ? "text-blue-600" : "text-gray-400"}`
               }>
                 Logout
